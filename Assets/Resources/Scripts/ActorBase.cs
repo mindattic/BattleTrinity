@@ -19,6 +19,5 @@ namespace BattleTrinity
         public float BullRushSpeed = 100f;
         public Vector3 Direction;
         public GameObject target;
-
     }
 }

@@ -19,10 +19,10 @@ namespace BattleTrinity
         private Button Skill02;
         private Button Skill03;
 
-        public bool IsReady
-        {
-            get => (GameManager != null);
-        }
+        //public bool IsReady
+        //{
+        //    get => (GameManager != null);
+        //}
 
         //Awake is called when the script instance is being loaded
         private void Awake()
@@ -37,7 +37,12 @@ namespace BattleTrinity
             //Internal components
             Skill01 = GameObject.Find("Skill-01").GetComponent<Button>();
             Skill01.onClick.AddListener(OnSkill01Click);
-           
+
+            Skill02 = GameObject.Find("Skill-02").GetComponent<Button>();
+            Skill02.onClick.AddListener(OnSkill02Click);
+
+            Skill03 = GameObject.Find("Skill-01").GetComponent<Button>();
+            Skill03.onClick.AddListener(OnSkill02Click);
 
             LineSpacing = (Screen.height * 0.03f);    
         }
@@ -62,28 +67,42 @@ namespace BattleTrinity
 
         public void OnSkill01Click()
         {
-            if (!IsReady)
-                return;
+            //if (!IsReady)
+            //    return;
 
-            Cursor.CursorState = CURSOR_STATE.Move;
-            //Cursor.SpriteRenderer.sprite = Cursor.Sprites["Reticle"]; 
         }
 
-     
+
+        public void OnSkill02Click()
+        {
+            //if (!IsReady)
+            //    return;
+
+        }
+
+        public void OnSkill03Click()
+        {
+            //if (!IsReady)
+            //    return;
+
+        }
+
 
         //OnGUI() is called to handle GUI events
         private void OnGUI()
         {
-            if (!IsReady)
-                return;
+            //if (!IsReady)
+            //    return;
 
+  
             GUI.skin.font = Consolas;
 
             GUI.Label(new Rect(10, Screen.height - (LineSpacing * 13), 1000, 32), $"          Running Time: " + Time.time.ToString("0.##") + " seconds");
             GUI.Label(new Rect(10, Screen.height - (LineSpacing * 12), 1000, 32), $"                Camera: " + Camera.main.transform.position.ToString());
             GUI.Label(new Rect(10, Screen.height - (LineSpacing * 11), 1000, 32), $"                   FPS: {(1.0f / DeltaTime).ToString("0.##")}");
+            GUI.Label(new Rect(10, Screen.height - (LineSpacing * 10), 1000, 32), $"          Current Turn: {GameManager.TurnManager.SelectedActor.Name}");
 
-  
+
 
         }
     }

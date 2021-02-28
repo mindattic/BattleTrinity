@@ -1,23 +1,32 @@
-﻿using System.Collections;
+﻿using BattleTrinity.Interface;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace BattleTrinity
 {
-    public class Actor : ActorBase
+    public class Actor : ActorBase, IActor, ICursorClick
     {
+        //Interface properties
+        string IActor.Name { get => name; }
+        GameObject IActor.GameObject { get => gameObject; }
+        Rigidbody2D IActor.RigidBody2D { get => RigidBody2D; }
+        SpriteRenderer IActor.SpriteRenderer { get => SpriteRenderer; }
+        PolygonCollider2D IActor.PolygonCollider2D { get => PolygonCollider2D; }
 
+        bool IsSelectedActor { get => name == GameManager.TurnManager.SelectedActor.Name; }
+
+        //Awake is called when the script instance is being loaded
         void Awake()
         {
             GameManager = (GameManager)GameObject.Find("GameManager").GetComponent("GameManager");
 
-            SpriteRenderer = this.GetComponent<SpriteRenderer>();
             RigidBody2D = this.GetComponent<Rigidbody2D>();
+            SpriteRenderer = this.GetComponent<SpriteRenderer>();          
             PolygonCollider2D = this.GetComponent<PolygonCollider2D>();
-
         }
 
-        // Start is called before the first frame update
+        //Start() is called just before any of the update methods is called the first time
         void Start()
         {
             if (target == null)
@@ -26,7 +35,7 @@ namespace BattleTrinity
             Direction = this.transform.position.DirectionTo(target.transform.position);
         }
 
-        // Update is called once per frame
+        //Update() is called every frame (as often as possible)
         void Update()
         {
             CheckBullRush();
@@ -36,6 +45,10 @@ namespace BattleTrinity
             PreviousMoveState = CurrentMoveState;
         }
 
+        //FixedUpdate() is called every fixed framerate frame
+        public void FixedUpdate()
+        {
+        }
 
         private void CheckBullRush()
         {
@@ -86,6 +99,11 @@ namespace BattleTrinity
             collision.gameObject.GetComponent<Actor>().CurrentMoveState = ACTOR_MOVE_STATE.Moving;
             Vector2 bounce = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
             RigidBody2D.AddForce(collision.contacts[0].normal * bounce);
+        }
+
+        public void OnCursorClick()
+        {
+            GameManager.TurnManager.SetSelectedActor(name);
         }
 
 

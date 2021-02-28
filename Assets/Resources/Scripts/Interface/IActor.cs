@@ -12,9 +12,10 @@ namespace BattleTrinity.Interface
     public interface IActor
     {
         //Properties
+        string Name { get; }
         GameObject GameObject { get; }
-        Rigidbody2D Rigidbody2D { get; }
-        
+        Rigidbody2D RigidBody2D { get; }    
         SpriteRenderer SpriteRenderer { get; }
+        PolygonCollider2D PolygonCollider2D { get; }
     }
 }

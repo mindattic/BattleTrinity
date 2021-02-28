@@ -10,22 +10,17 @@ namespace BattleTrinity
     {
 
         public CameraManager CameraManager;
-
-    
+        public TurnManager TurnManager;
 
         public float Speed = 1.0f;
-
         public bool IsPaused = false;
-
-        public GameObject ActiveActor;
-
-
 
         //Awake is called when the script instance is being loaded
         private void Awake()
         {
-            //CameraManager = (CameraManager)GameObject.Find("Main Camera\\CameraManager").GetComponent("CameraManager");
-            ActiveActor = GameObject.Find("knight-02");
+            //External components
+            CameraManager = (CameraManager)GameObject.Find("Main Camera").GetComponent("CameraManager");
+            TurnManager = (TurnManager)GameObject.Find("TurnManager").GetComponent("TurnManager");
         }
 
         //Start() is called just before any of the update methods is called the first time
@@ -47,7 +42,6 @@ namespace BattleTrinity
         {
 
         }
-
 
         private void TogglePause()
         {
