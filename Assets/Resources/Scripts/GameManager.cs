@@ -26,7 +26,7 @@ namespace BattleTrinity
         //Start() is called just before any of the update methods is called the first time
         private void Start()
         {
-   
+            Cursor.visible = false;
         }
 
         //Update() is called every frame (as often as possible)

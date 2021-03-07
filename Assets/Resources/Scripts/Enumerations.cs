@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 namespace BattleTrinity
 {
 
-
+    public enum TURN_STATE
+    {
+        TurnStart = 0,
+        SelectTarget = 1, ChooseDirection = 2, MeasureDistance = 3,
+        Resolve = 99,
+        TurnEnd = 100
+    }
 
 
     public enum CAMERA_STATE

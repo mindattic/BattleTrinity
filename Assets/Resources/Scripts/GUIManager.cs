@@ -9,7 +9,7 @@ namespace BattleTrinity
     public class GUIManager : MonoBehaviour
     {
         private GameManager GameManager;
-        private Cursor Cursor;
+        private Cursor3D Cursor;
 
         private float DeltaTime = 0.0f;
         private Font Consolas;
@@ -32,7 +32,7 @@ namespace BattleTrinity
 
             //External components
             GameManager = (GameManager)GameObject.Find("GameManager").GetComponent("GameManager");
-            Cursor = (Cursor)GameObject.Find("Cursor").GetComponent("Cursor");
+            Cursor = (Cursor3D)GameObject.Find("Cursor3D").GetComponent("Cursor");
 
             //Internal components
             Skill01 = GameObject.Find("Skill-01").GetComponent<Button>();
@@ -41,8 +41,8 @@ namespace BattleTrinity
             Skill02 = GameObject.Find("Skill-02").GetComponent<Button>();
             Skill02.onClick.AddListener(OnSkill02Click);
 
-            Skill03 = GameObject.Find("Skill-01").GetComponent<Button>();
-            Skill03.onClick.AddListener(OnSkill02Click);
+            Skill03 = GameObject.Find("Skill-03").GetComponent<Button>();
+            Skill03.onClick.AddListener(OnSkill03Click);
 
             LineSpacing = (Screen.height * 0.03f);    
         }

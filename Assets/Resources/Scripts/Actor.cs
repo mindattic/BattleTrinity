@@ -74,15 +74,18 @@ namespace BattleTrinity
 
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
+        void OnCollisionEnter2D(Collision2D other)
         {
-            if (CurrentMoveState == ACTOR_MOVE_STATE.BullRush)
+            if(other.gameObject.tag == "Actor")
             {
-                StopMoving();
-            }
-            else if (CurrentMoveState == ACTOR_MOVE_STATE.Idle)
-            {
-                Bounce(collision);
+                if (CurrentMoveState == ACTOR_MOVE_STATE.BullRush)
+                {
+                    StopMoving();
+                }
+                else if (CurrentMoveState == ACTOR_MOVE_STATE.Idle)
+                {
+                    Bounce(other);
+                }
             }
         }
 
@@ -94,11 +97,11 @@ namespace BattleTrinity
             RigidBody2D.angularVelocity = 0f;
         }
 
-        private void Bounce(Collision2D collision)
+        private void Bounce(Collision2D other)
         {
-            collision.gameObject.GetComponent<Actor>().CurrentMoveState = ACTOR_MOVE_STATE.Moving;
-            Vector2 bounce = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
-            RigidBody2D.AddForce(collision.contacts[0].normal * bounce);
+            other.gameObject.GetComponent<Actor>().CurrentMoveState = ACTOR_MOVE_STATE.Moving;
+            Vector2 bounce = other.gameObject.GetComponent<Rigidbody2D>().velocity;
+            RigidBody2D.AddForce(other.contacts[0].normal * bounce);
         }
 
         public void OnCursorClick()
