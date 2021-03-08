@@ -1,4 +1,5 @@
 ﻿using BattleTrinity.Interface;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,9 @@ namespace BattleTrinity
         Rigidbody2D IActor.RigidBody2D { get => RigidBody2D; }
         SpriteRenderer IActor.SpriteRenderer { get => SpriteRenderer; }
         PolygonCollider2D IActor.PolygonCollider2D { get => PolygonCollider2D; }
-
-        bool IsSelectedActor { get => name == GameManager.TurnManager.SelectedActor.Name; }
+        ACTOR_MOVE_STATE IActor.CurrentMoveState { get => CurrentMoveState; set => CurrentMoveState = value; }
+        ACTOR_MOVE_STATE IActor.PreviousMoveState { get => PreviousMoveState; set => PreviousMoveState = value; }
+        bool IActor.IsSelectedActor { get => name == GameManager.TurnManager.SelectedActor.Name; }
 
         //Awake is called when the script instance is being loaded
         void Awake()
@@ -22,7 +24,7 @@ namespace BattleTrinity
             GameManager = (GameManager)GameObject.Find("GameManager").GetComponent("GameManager");
 
             RigidBody2D = this.GetComponent<Rigidbody2D>();
-            SpriteRenderer = this.GetComponent<SpriteRenderer>();          
+            SpriteRenderer = this.GetComponent<SpriteRenderer>();
             PolygonCollider2D = this.GetComponent<PolygonCollider2D>();
         }
 
@@ -74,9 +76,9 @@ namespace BattleTrinity
 
         }
 
-        void OnCollisionEnter2D(Collision2D other)
+        void OnCollisionEnter2D(Collision2D x)
         {
-            if(other.gameObject.tag == "Actor")
+            if (x.collider.gameObject.CompareTag("Actor"))
             {
                 if (CurrentMoveState == ACTOR_MOVE_STATE.BullRush)
                 {
@@ -84,24 +86,27 @@ namespace BattleTrinity
                 }
                 else if (CurrentMoveState == ACTOR_MOVE_STATE.Idle)
                 {
-                    Bounce(other);
+                    Bounce(x);
                 }
             }
         }
 
 
-        private void StopMoving()
+        public void StopMoving()
         {
             CurrentMoveState = ACTOR_MOVE_STATE.Idle;
             RigidBody2D.velocity = Vector3.zero;
             RigidBody2D.angularVelocity = 0f;
         }
 
-        private void Bounce(Collision2D other)
+        public void Bounce(Collision2D x)
         {
-            other.gameObject.GetComponent<Actor>().CurrentMoveState = ACTOR_MOVE_STATE.Moving;
-            Vector2 bounce = other.gameObject.GetComponent<Rigidbody2D>().velocity;
-            RigidBody2D.AddForce(other.contacts[0].normal * bounce);
+            if (x.gameObject.CompareTag("Actor") && CurrentMoveState == ACTOR_MOVE_STATE.BullRush)
+            {
+                x.gameObject.GetComponent<Actor>().CurrentMoveState = ACTOR_MOVE_STATE.Moving;
+                Vector2 bounce = x.gameObject.GetComponent<Rigidbody2D>().velocity;
+                RigidBody2D.AddForce(x.contacts[0].normal * bounce);
+            }
         }
 
         public void OnCursorClick()

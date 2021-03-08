@@ -9,15 +9,15 @@ namespace BattleTrinity
     {
         protected GameManager GameManager;
 
-        protected SpriteRenderer SpriteRenderer;
-        protected Rigidbody2D RigidBody2D;
-        protected PolygonCollider2D PolygonCollider2D;
+        public SpriteRenderer SpriteRenderer;
+        public Rigidbody2D RigidBody2D;
+        public PolygonCollider2D PolygonCollider2D;
 
-        protected ACTOR_MOVE_STATE CurrentMoveState = ACTOR_MOVE_STATE.Idle;
-        protected ACTOR_MOVE_STATE PreviousMoveState = ACTOR_MOVE_STATE.Idle;
+        public ACTOR_MOVE_STATE CurrentMoveState = ACTOR_MOVE_STATE.Idle;
+        public ACTOR_MOVE_STATE PreviousMoveState = ACTOR_MOVE_STATE.Idle;
 
-        protected float BullRushSpeed = 100f;
-        protected Vector3 Direction;
+        public float BullRushSpeed = 100f;
+        public Vector3 Direction;
         public GameObject target;
     }
 }

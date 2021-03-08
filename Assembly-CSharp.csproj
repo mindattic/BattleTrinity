@@ -71,14 +71,14 @@
     <Compile Include="Assets\Resources\Scripts\ActorBase.cs" />
     <Compile Include="Assets\Resources\Scripts\Enumerations.cs" />
     <Compile Include="Assets\Resources\Scripts\CameraManager.cs" />
+    <Compile Include="Assets\TeamManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Cursor3D.cs" />
     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Interface\ICursorClick.cs" />
+    <Compile Include="Assets\Resources\Scripts\Models\Team.cs" />
     <Compile Include="Assets\Resources\Scripts\GUIManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Constants.cs" />
     <Compile Include="Assets\Resources\Scripts\Actor.cs" />
-    <Compile Include="Assets\TeamManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\Models\Team.cs" />
     <Reference Include="Unity.XR.Management">
       <HintPath>D:/Unity/BattleTrinity/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
     </Reference>

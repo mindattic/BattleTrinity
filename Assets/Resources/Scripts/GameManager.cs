@@ -32,7 +32,27 @@ namespace BattleTrinity
         //Update() is called every frame (as often as possible)
         private void Update()
         {
-          
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                IActor knight01 = (IActor)GameObject.Find("knight-01").GetComponent("Actor");
+                knight01.StopMoving();
+                knight01.GameObject.transform.position = new Vector3(-26.9f, -13.4f, 0f);
+                knight01.CurrentMoveState = ACTOR_MOVE_STATE.Idle;
+                knight01.PreviousMoveState = ACTOR_MOVE_STATE.Idle;
+                
+
+                IActor knight02 = (IActor)GameObject.Find("knight-02").GetComponent("Actor");
+                knight02.StopMoving();
+                knight02.GameObject.transform.position = new Vector3(-79.3f, -54.7f, 0f);
+                knight02.CurrentMoveState = ACTOR_MOVE_STATE.BullRush;
+                knight02.PreviousMoveState = ACTOR_MOVE_STATE.Idle;
+
+                IActor knight03 = (IActor)GameObject.Find("knight-03").GetComponent("Actor");
+                knight03.StopMoving();
+                knight03.GameObject.transform.position = new Vector3(0f, -6f, 0f);
+                knight03.CurrentMoveState = ACTOR_MOVE_STATE.Idle;
+                knight03.PreviousMoveState = ACTOR_MOVE_STATE.Idle;
+            }
 
 
         }

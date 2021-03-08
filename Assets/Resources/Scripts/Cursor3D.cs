@@ -65,18 +65,18 @@ namespace BattleTrinity
             float scale = -Camera.main.transform.position.z - ScaleModifier;
             transform.localScale = new Vector3(scale, scale, 0);
 
-            if (Input.GetMouseButtonDown(0))
+            if (HoverObject == null)
+                return;
+
+            if (Input.GetMouseButton(0))
             {
-                if (HoverObject != null)
-                {
-                    ExecuteEvents.Execute<ICursorClick>(HoverObject, null, (x, y) => x.OnCursorClick());
-                }
+                HoverObject.transform.position = transform.position;
             }
-
+            else if (Input.GetMouseButtonDown(1))
+            {
+                ExecuteEvents.Execute<ICursorClick>(HoverObject, null, (x, y) => x.OnCursorClick());
+            }
         }
-
-
-
 
         //FixedUpdate() is called every fixed framerate frame
         public void FixedUpdate()
@@ -84,18 +84,46 @@ namespace BattleTrinity
             //transform.position = new Vector3(transform.position.x, transform.position.y, Common.CameraDistanceFromZero());
         }
 
-        void OnCollisionEnter2D(Collision2D other)
-        {
 
-            if (other.gameObject.tag == "Actor")
+        private void OnTriggerEnter2D(Collider2D x)
+        {
+            if (x.gameObject.CompareTag("Actor"))
             {
-                HoverObject = other.gameObject;
+                //Physics2D.IgnoreCollision(x.collider, x.otherCollider);
+                HoverObject = x.gameObject;
             }
-            else
+        }
+
+        private void OnTriggerExit2D(Collider2D x)
+        {
+            if (x.gameObject.CompareTag("Actor"))
             {
                 HoverObject = null;
             }
         }
 
+
+        //void OnCollisionEnter2D(Collision2D x)
+        //{
+        //    if (x.collider.gameObject.CompareTag("Actor"))
+        //    {
+        //        Physics2D.IgnoreCollision(x.collider, x.otherCollider);
+        //        HoverObject = x.collider.gameObject;
+        //    }
+        //    if (x.collider.gameObject.CompareTag("Actor"))
+        //    {
+        //        //Physics2D.IgnoreCollision(x.collider, x.otherCollider);
+        //        HoverObject = x.otherCollider.gameObject;
+        //    }
+        //}
+
+        //private void OnCollisionExit2D(Collision2D x)
+        //{
+        //    if (x.collider.gameObject.CompareTag("Actor"))
+        //    {
+        //        HoverObject = null;
+        //    }
+
+        //}
     }
 }

@@ -14,8 +14,14 @@ namespace BattleTrinity.Interface
         //Properties
         string Name { get; }
         GameObject GameObject { get; }
-        Rigidbody2D RigidBody2D { get; }    
+        Rigidbody2D RigidBody2D { get; }
         SpriteRenderer SpriteRenderer { get; }
         PolygonCollider2D PolygonCollider2D { get; }
+        ACTOR_MOVE_STATE CurrentMoveState { get; set;}
+        ACTOR_MOVE_STATE PreviousMoveState { get; set; }
+        bool IsSelectedActor { get; }
+
+        void StopMoving();
+
     }
 }

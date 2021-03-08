@@ -100,7 +100,7 @@ namespace BattleTrinity
             GUI.Label(new Rect(10, Screen.height - (LineSpacing * 13), 1000, 32), $"          Running Time: " + Time.time.ToString("0.##") + " seconds");
             GUI.Label(new Rect(10, Screen.height - (LineSpacing * 12), 1000, 32), $"                Camera: " + Camera.main.transform.position.ToString());
             GUI.Label(new Rect(10, Screen.height - (LineSpacing * 11), 1000, 32), $"                   FPS: {(1.0f / DeltaTime).ToString("0.##")}");
-            GUI.Label(new Rect(10, Screen.height - (LineSpacing * 10), 1000, 32), $"          Current Turn: {GameManager.TurnManager.SelectedActor.Name}");
+            //GUI.Label(new Rect(10, Screen.height - (LineSpacing * 10), 1000, 32), $"          Current Turn: {GameManager.TurnManager.SelectedActor.Name}");
 
 
 
